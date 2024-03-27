@@ -1,0 +1,25 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-module-flags: -target arm64-apple-ios17.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name SystemUsageTracker
+import Foundation
+import Metal
+import Swift
+@_exported import SystemUsageTracker
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public struct CPU {
+  public mutating func systemUsage() -> (system: Swift.Double, user: Swift.Double, idle: Swift.Double, nice: Swift.Double)
+}
+@_cdecl("StartTracking")
+public func StartTracking(cpuUsageDelegate: @convention(c) (Swift.Double, Swift.Double, Swift.Double, Swift.Double) -> Swift.Void, gpuUsageDelegate: @convention(c) (Swift.Int) -> Swift.Void, ramUsageDelegate: @convention(c) (Swift.Double, Swift.Double, Swift.Double, Swift.Double, Swift.Double) -> Swift.Void)
+@_cdecl("StopTracking")
+public func StopTracking()
+public struct Memory {
+  public func memoryUsage() -> (free: Swift.Double, active: Swift.Double, inactive: Swift.Double, wired: Swift.Double, compressed: Swift.Double)
+}
+@_hasMissingDesignatedInitializers public class Tracker {
+  public func StartTracking(cpuUsageDelegate: @convention(c) (Swift.Double, Swift.Double, Swift.Double, Swift.Double) -> Swift.Void, gpuUsageDelegate: @convention(c) (Swift.Int) -> Swift.Void, ramUsageDelegate: @convention(c) (Swift.Double, Swift.Double, Swift.Double, Swift.Double, Swift.Double) -> Swift.Void)
+  public func StopTracking()
+  @objc deinit
+}
